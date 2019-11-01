@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StudentList</title>
+
+</head>
+<body>
+
+<ul>
+    {% for student in students %}
+        <li>{{ student.s_name }}</li>
+    {% empty %}
+        <h1>Sunck辍学了</h1>
+    {% endfor %}
+
+</ul>
+
+<hr>
+
+<ul>
+    {% for student in students %}
+        <li>{{ forloop.revcounter }}:{{ student.get_name }}</li>
+    {% endfor %}
+
+</ul>
+
+<hr>
+<h3>{{ students.1.s_name }}</h3>
+
+<hr>
+
+<h3>{{ student_dict.hobby }}</h3>
+<h3>{{ student_dict.hobby|lower }}</h3>
+<h3>{{ student_dict.hobby|upper }}</h3>
+
+<hr>
+<ul>
+    {% for student in students %}
+        {% if forloop.first %}
+            <li style="color: red">{{ student.s_name }}</li>
+        {% elif forloop.last %}
+            <li style="color: green">{{ student.s_name }}</li>
+        {% else %}
+            <li>{{ student.s_name }}</li>
+        {% endif %}
+    {% endfor %}
+
+</ul>
+
+<hr>
+
+<!--
+    老板说让咱们把第一版写的卡一点，等客户交钱优化，我们给他提升一下响应速度
+    time.sleep(3)
+-->
+
+<h4>{{ count }}</h4>
+<h4>{% widthratio count 1 5 %}</h4>
+<h4>{% widthratio count 5 1 %}</h4>
+<h4>{{ count|add:2 }}</h4>
+<h4>{{ count|add:-2 }}</h4>
+
+{#  打不到我吧，哈哈哈  #}
+
+{% comment %}
+    <ul>
+        <li>xxx</li>
+    </ul>
+{% endcomment %}
+
+<hr>
+
+<ul>
+    {% for student in students %}
+        {% if forloop.counter|divisibleby:3 %}
+            <li style="color: #ff0000">{{ student.s_name }}</li>
+            {% else %}
+            <li style="color: #b228ff;">{{ student.s_name }}</li>
+        {% endif %}
+    {% endfor %}
+
+</ul>
+
+<hr>
+<ul>
+    {% for student in students %}
+        {% ifequal forloop.counter 5 %}
+            <li style="color: orange">{{ student.s_name }}</li>
+            {% else %}
+            <li style="color: blue">{{ student.s_name }}</li>
+        {% endifequal %}
+    {% endfor %}
+
+</ul>
+
+<hr>
+{#<p>{{ code|safe }}</p>#}
+
+{% autoescape on %}
+    {{ code }}
+{% endautoescape %}
+
+</body>
+</html>
